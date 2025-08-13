@@ -1,4 +1,5 @@
 import pygame
+import random
 from constants import *
 from circleshape import CircleShape
 
@@ -11,3 +12,19 @@ class Asteroid(CircleShape):
 
     def update(self, dt):
         self.position += (self.velocity * dt)
+
+    def split(self):
+        self.kill()
+        if self.radius <= ASTEROID_MIN_RADIUS:
+            return
+        
+        new_radius = self.radius - ASTEROID_MIN_RADIUS
+
+        split_one = Asteroid(self.position.x, self.position.y, new_radius)
+        split_two = Asteroid(self.position.x, self.position.y, new_radius)
+
+        split_angle = random.uniform(20,50)
+        split_one.velocity = (self.velocity.rotate(split_angle)) * 1.2
+        split_two.velocity = (self.velocity.rotate(-split_angle)) * 1.2
+        
+        
