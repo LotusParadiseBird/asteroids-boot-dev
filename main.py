@@ -1,9 +1,6 @@
-# this allows us to use code from
-# the open-source pygame library
-# throughout this file
 import pygame
 from constants import *
-from player import *
+from player import Player
 
 def main():
     print("Starting Asteroids!")
@@ -29,6 +26,8 @@ def main():
         
         screen.fill("black")
         player.draw(screen)
+        player.update(dt)
+        
         pygame.display.flip()
         
         # limit the FPS to 60
